@@ -36,9 +36,9 @@ echo "option PNG_SEQUENTIAL_READ [on]" > scripts/pngusr.dfa
 sed -i 's#scripts/pnglibconf.c: scripts/pnglibconf.dfa scripts/options.awk pngconf.h#scripts/pnglibconf.c: scripts/pnglibconf.dfa scripts/options.awk pngconf.h scripts/pngusr.dfa#g'\
 	-i 's#\${srcdir}/scripts/pnglibconf.dfa 1>&2#\${srcdir}/scripts/pnglibconf.dfa \${srcdir}/pngusr.dfa 1>&2#g' Makefile
 
-cat ./configure
 # build the libpng library.
 autoreconf -f -i
+copy ./configure $OUT
 ./configure --with-libpng-prefix=OSS_FUZZ_
 make -j$(nproc) clean
 make -j$(nproc) libpng16.la
