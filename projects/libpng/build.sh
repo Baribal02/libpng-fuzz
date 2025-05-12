@@ -31,14 +31,14 @@ cat scripts/pnglibconf.dfa | \
 mv scripts/pnglibconf.dfa.temp scripts/pnglibconf.dfa
 
 # change libpng pre-build options
-echo "option PNG_SEQUENTIAL_READ [on]" > scripts/pngusr.dfa
+#echo "option PNG_SEQUENTIAL_READ [on]" > scripts/pngusr.dfa
 # add file in the Makefile to activate the pre-build changes
-sed -i 's#scripts/pnglibconf.c: scripts/pnglibconf.dfa scripts/options.awk pngconf.h#scripts/pnglibconf.c: scripts/pnglibconf.dfa scripts/options.awk pngconf.h scripts/pngusr.dfa#g'\
-	-i 's#\${srcdir}/scripts/pnglibconf.dfa 1>&2#\${srcdir}/scripts/pnglibconf.dfa \${srcdir}/pngusr.dfa 1>&2#g' Makefile
+#sed -i 's#scripts/pnglibconf.c: scripts/pnglibconf.dfa scripts/options.awk pngconf.h#scripts/pnglibconf.c: scripts/pnglibconf.dfa scripts/options.awk pngconf.h scripts/pngusr.dfa#g'\
+#	-i 's#\${srcdir}/scripts/pnglibconf.dfa 1>&2#\${srcdir}/scripts/pnglibconf.dfa \${srcdir}/pngusr.dfa 1>&2#g' Makefile
 
 # build the libpng library.
 autoreconf -f -i
-copy ./configure $OUT
+cp ./configure $OUT
 ./configure --with-libpng-prefix=OSS_FUZZ_
 make -j$(nproc) clean
 make -j$(nproc) libpng16.la
